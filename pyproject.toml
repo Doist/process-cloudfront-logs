@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "process-cloudfront-logs"
+version = "1.0.0"
+description = "AWS Lambda Script to convert AWS CloudFront logs to JSON format"
+readme = "README.md"
+homepage = "https://github.com/Doist/process-cloudfront-logs"
+repository = "https://github.com/Doist/process-cloudfront-logs"
+authors = ["Doist Developers <dev@doist.com>"]
+license = "MIT"
+classifiers = [
+    "Intended Audience :: Developers",
+]
+include = [
+    "CHANGELOG.md"
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+boto3 = "^1.14.22"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.3.2"
+black = "^19.10b0"
+flake8 = "^3.7.9"
+
+[build-system]
+requires = ["poetry>=1.0.5"]
+build-backend = "poetry.masonry.api"
