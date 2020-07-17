@@ -7,6 +7,11 @@ homepage = "https://github.com/Doist/process-cloudfront-logs"
 repository = "https://github.com/Doist/process-cloudfront-logs"
 authors = ["Doist Developers <dev@doist.com>"]
 license = "MIT"
+
+packages = [
+    { include = "process.py" },
+]
+
 classifiers = [
     "Intended Audience :: Developers",
 ]
