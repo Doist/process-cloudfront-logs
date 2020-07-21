@@ -82,7 +82,32 @@ class CloudFrontS3Key:
 
 
 def lambda_handler(event, context):
-    ev_record = event["Records"][0]
+    """
+    The entry point, a lambda handler.
+
+    The runner invokes event and context parameters according to the AWS Lambda
+    specification: https://docs.aws.amazon.com/lambda/latest/dg/python-handler.html
+
+    The function expects an event of the type "ObjectCreated:Put" from "aws:s3".
+    Ref the format: https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html
+    """
+    for record in event["Records"]:
+        process_record(record)
+
+
+def process_record(ev_record):
+    """
+    Process a single record in the event.
+
+    Event record expected format and example:
+
+    {
+        "s3": {
+            "bucket": {"name": "my-bucket"},
+            "object": {"key": "my-record.gz"}
+        }
+    }
+    """
     source_bucket = ev_record["s3"]["bucket"]["name"]
     source_key = ev_record["s3"]["object"]["key"]
 
