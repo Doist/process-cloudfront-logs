@@ -35,7 +35,15 @@ poetry run pytest
 
 ## Making it usable for Athena
 
-To make it usable for AWS Athena, once some JSON files are created, create a new AWS Glue Crawler to process the content, and make it run daily to collect new partitions.
+To make it usable for AWS Athena, once some JSON files are created, create a new AWS Glue Crawler to process the content. Then set up a so-called [partition projection](https://docs.aws.amazon.com/athena/latest/ug/partition-projection.html) to make Athena recognize new partitions without manually adding them daily.
+
+Go to "Edit table details" in AWS Glue catalog and add the following new properties:
+
+- `projection.date.type: date`
+- `projection.date.format: yyyy-MM-dd`
+- `projection.date.range: 2020-07-01,NOW`, but replace "2020-07-01" with the date of your first record.
+- `projection.enabled: true`
+
 
 ## Invoking the function manually to process existing logfiles
 
