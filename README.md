@@ -34,6 +34,10 @@ poetry run pytest
 - Deploy a new lambda function by running `make deploy` or `make ENV=production deploy`. The default environment is staging. The command creates a lambda function and all required resources. Please see the [CloudFormation template](./cloudformation.yml) for details.
 - Test if the function works as expected. For the valid input, it has to create a new object in the destination S3 bucket.
 
+## Deploing a new version
+
+To deploy a new version of the function run `make deploy` again or `make ENV=production deploy` for production environment.
+
 ## Making it usable for Athena
 
 To make it usable for AWS Athena, once some JSON files are created, create a new AWS Glue Crawler to process the content, and make it run daily to collect new partitions.
