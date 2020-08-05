@@ -1,6 +1,6 @@
 # Process S3 logs from CloudFront
 
-Process CloudFront logs to convert them from custom CSV format to JSON-encoded, merging date and time fields into a single datetime object.
+Process CloudFront logs to convert them from custom CSV format to JSON-encoded, merging date and time fields into a single date-time object.
 
 ## Necessary environment
 
@@ -12,25 +12,26 @@ Process CloudFront logs to convert them from custom CSV format to JSON-encoded, 
   - Read permissions for the S3 bucket with logs to read the content of the source key.
   - Write permissions for the `S3_DEST_BUCKET` to write the modified file.
 
+Please see detailed IAM policies in the [CloudFormation template](./cloudformation.yml).
+
 ## Testing locally
 
 Create a Poetry project.
 
-```
+```sh
 poetry install
 ```
 
 Run tests:
 
-```
+```sh
 poetry run pytest
 ```
 
 ## Installing to make it work
 
 - Create a new S3 bucket to store the results of the processing.
-- Create a new lambda function, set necessary permissions, set environment variable `S3_DEST_BUCKET`.
-- Create a trigger S3, event type "ObjectCreated", and connect it to the lambda function.
+- Deploy a new lambda function by running `make deploy` or `make ENV=production deploy`. The default environment is staging. The command creates a lambda function and all required resources. Please see the [CloudFormation template](./cloudformation.yml) for details.
 - Test if the function works as expected. For the valid input, it has to create a new object in the destination S3 bucket.
 
 ## Making it usable for Athena
@@ -57,7 +58,7 @@ The script has two modes: "print" or "index". The print mode is a "dry run" mode
 
 Print to stdout all S3 keys with CloudFront logs for 16 July 2020.
 
-```
+```sh
 poetry run ./scripts/process_all.py \
     --bucket=cloudfront-logs \
     --action=print \
@@ -67,7 +68,7 @@ poetry run ./scripts/process_all.py \
 
 Index the contents of 16 July 2020 asynchronously.
 
-```
+```sh
 poetry run ./scripts/process_all.py \
     --bucket=cloudfront-logs \
     --action=index \
