@@ -3,8 +3,8 @@ name = "process-cloudfront-logs"
 version = "1.1.0"
 description = "AWS Lambda Script to convert AWS CloudFront logs to JSON format"
 readme = "README.md"
-homepage = "https://github.com/Doist/process-cloudfront-logs"
-repository = "https://github.com/Doist/process-cloudfront-logs"
+homepage = "https://github.com/todoist/process-cloudfront-logs"
+repository = "https://github.com/todoist/process-cloudfront-logs"
 authors = ["Doist Developers <dev@doist.com>"]
 license = "MIT"
 
